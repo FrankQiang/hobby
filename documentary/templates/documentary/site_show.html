@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} {{ title.title_name }} - 记录 {% endblock %}   
+
+{% block content %} 
+<div class="container main">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading">{{ title.title_name }}</div>
+                {% for site in sites %}
+                    <div class="panel-body">
+                        {{ site.seed }}
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

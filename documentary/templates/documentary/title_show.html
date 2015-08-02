@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+
+{% block title %} 标题 - 记录 {% endblock %}   
+
+{% block tab %}
+    <a href="{%  url  'documentary:site_add'  %}" class="hidden-xs btn btn-primary btn-sm navbar-btn navbar-right">添加种子</a>
+{% endblock %}
+
+{% block content %} 
+<div class="container">
+    <div class="row">
+        {% for title in titles %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:63px"><a href="{% url 'documentary:site_show' title.id %}">{{ title.title_name }}</a></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}

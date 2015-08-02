@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %} 纪录片 - 记录 {% endblock %}
+
+{% block content %}
+<div class="container main">
+    <div class="row">
+        {% for title in titles %}
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading" style="height:63px"><a href="{% url 'documentary:site_show' title.id %}">{{ title.title_name }}</a></div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <div class="row">
+        <div class="col-md-11">
+            <nav class="pull-right">
+                <ul class="pagination">
+                    <li><a href="{% url 'documentary:title_page' previous_page %}" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a></li>
+                    <li class="active"><a href="#">{{ current }}</a></li>
+                    <li><a href="javascript:void(0)">共 {{ total_pages }} 页</a></li>
+                    <li><a href="{% url 'documentary:title_page' next_page %}" aria-label="Next"><span aria-hidden="true">&raquo;</span></a></li>
+                    <li><a href="{% url 'documentary:title_show' %}">查看全部</a></li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+{% endblock %}

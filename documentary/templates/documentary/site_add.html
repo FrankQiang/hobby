@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+
+{% block title %} 批量加载种子 - 记录 {% endblock %}   
+
+{% block tab %}
+    <a href="{%  url  'documentary:site_add'  %}" class="hidden-xs btn btn-primary btn-sm navbar-btn navbar-right">添加种子</a>
+{% endblock %}
+
+{% block content %} 
+<div class="container main">
+    <a href="{% url 'documentary:site_batch_add' %}"><span class='glyphicon glyphicon-plus'></span>batch add site data</a>
+</div>
+{% endblock %}
