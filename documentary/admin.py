@@ -1,5 +1,5 @@
 from django.contrib import admin
-from documentary.models import Author, Title, Site
+from documentary.models import Author, Title, Site,Staff
 
 
 class AuthorAdmin(admin.ModelAdmin):
@@ -20,7 +20,13 @@ class SiteAdmin(admin.ModelAdmin):
     date_hierarchy = 'create_time'
     ordering = ('-create_time',)
 
+class StaffAdmin(admin.ModelAdmin):
+    list_display = ('name','create_time')
+    list_filter = ('create_time',)
+    ordering = ('-create_time',)
+
 
 admin.site.register(Author, AuthorAdmin)
 admin.site.register(Title, TitleAdmin)
 admin.site.register(Site,SiteAdmin)
+admin.site.register(Staff,StaffAdmin)

@@ -28,3 +28,19 @@ class Site(models.Model):
 
     def __unicode__(self):
         return u'%s' % (self.seed)
+
+
+
+class Staff(models.Model):
+    name = models.CharField(max_length=255)
+    age = models.IntegerField()
+    department = models.CharField(max_length=255)
+    gender = models.CharField(max_length=4)
+    photo = models.ImageField(upload_to='photo',null=True,blank=True)
+    birthday = models.DateTimeField()
+    join_time = models.DateTimeField()
+    create_time = models.DateTimeField()
+    update_time = models.DateTimeField(null=True)
+
+    def __unicode__(self):
+        return u'%s' % (self.name)
