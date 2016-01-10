@@ -1,8 +1,11 @@
+# -*- coding:utf-8 -*-
 from django.shortcuts import render
 from django.http import HttpResponseRedirect
 from documentary.models import Title
 from documentary.models import Author
 from documentary.models import Site
+from django.core.cache import cache
+import requests
 
 
 def paging_title(page):
@@ -90,7 +93,7 @@ def site_batch_add(request):
         for x in range(0,(len(fields)-1)):
             site = Site(title=title , author = to,seed=fields[x])
             site.save()
-            
+
     return HttpResponseRedirect('/documentary/title/show')
 
 def error(request):
@@ -99,4 +102,25 @@ def error(request):
 def about(request):
     return render(request,"documentary/about.html")
 
-
+def test(request):
+#temp = req.json()['results'][0]
+#pm25 = temp['pm25']
+#temperature = temp['weather_data'][0]['temperature']
+    cache.delete('weather')
+    if not cache.get('weather'):
+        URL = 'http://api.map.baidu.com/telematics/v3/weather?location=南京&output=json&ak=FK9mkfdQsloEngodbFl4FeY3'
+        req = requests.get(URL)
+        temp = req.json()['results'][0]
+        pm25 = int(temp['pm25'])
+        temperature = temp['weather_data'][0]['temperature']
+       #pattern = re.compile(r'(\d+)')
+       #temperature = re.findall(pattern,temperature)
+       #temperature_low = temperature[1]
+       #temperature_high = temperature[0]
+       #data = {'pm25':pm25,'temperature_low':temperature_low,'temperature_high':temperature_high}
+        data = {'pm25':pm25,'temperature':temperature}
+        cache.set('weather',data,3600)
+        data_cache = cache.get('weather')
+    else:
+        data_cache = cache.get('weather')
+    return render(request,"documentary/test.html",{'data':data_cache})

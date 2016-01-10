@@ -11,4 +11,5 @@ urlpatterns = [
     url(r'^site/show/(\d+)$', views.site_show, name='site_show'),
     url(r'^site/batch/add/$', views.site_batch_add, name='site_batch_add'),
     url(r'^error$', views.error, name='error'),
+    url(r'^test/$',views.test,name='test'),
 ]
